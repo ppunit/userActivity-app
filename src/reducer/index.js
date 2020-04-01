@@ -1,5 +1,5 @@
 const initialState = {
-    isLoginSuccess: true,
+    isLoginSuccess: false,
     username: "",
     password: "",
     userActiveDetails: "",
