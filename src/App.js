@@ -1,26 +1,50 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  // Link,
+  // Redirect,
+} from "react-router-dom";
+import { connect } from 'react-redux'
+import Login from './components/login/login'
+import './App.scss';
+import DashBoard from './components/dashboard/dashboard'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  
+  logout(e) {
+    this.props.dispatch({ type: "onLoginSuccess", target: false })
+    if (this.props.history)
+      this.props.history.push('/');
+  }
+  render() {
+
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          
+          <div><h3>Users Activity</h3></div>
+          {Boolean(this.props.isLoginSuccess) ? <div className="logout-navigation-link" onClick={e => this.logout()}>Logout</div> : null}
+        
+         
+        </header>
+        <Router >
+          <Switch>
+            <Route exact path="/" strict component={Login} />
+            <Route path="/dashboard" render={() => <DashBoard />}></Route>,
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    isLoginSuccess: state.isLoginSuccess,
+  }
+}
+
+export default connect(mapStateToProps)(App);
