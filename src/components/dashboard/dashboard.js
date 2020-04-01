@@ -43,8 +43,8 @@ function DashBoard(props) {
     const classes = useStyles();
     const rows = TestJSON.members;
     const [page, setPage] = React.useState(0);
-    const [selectedDate,setSelectedDate]=React.useState("");
-    const [activityPerDate,setActivityPerDate]=React.useState(false)
+    const [selectedDate, setSelectedDate] = React.useState("");
+    const [activityPerDate, setActivityPerDate] = React.useState(false)
     const [rowsPerPage, setRowsPerPage] = React.useState(6);
     let finalObject = {}
     const handleChangePage = (event, newPage) => {
@@ -59,10 +59,7 @@ function DashBoard(props) {
     const openModal = (event, value) => {
         setActivityPerDate(false)
         setSelectedDate("")
-        console.log("sdfsdfsdfdsfdsf", value)
         let activePeriod = value.activity_periods
-        console.log(activePeriod)
-
         for (var x of activePeriod) {
             let date = x.start_time
             date = date.split(" ")
@@ -75,25 +72,22 @@ function DashBoard(props) {
             let year = date[2]
             let finalDate = year + '-' + month + "-" + day
             finalObject[finalDate] = x
-
         }
         props.dispatch({ type: "UserActiveDetails", target: finalObject })
-        console.log(finalObject)
         JwModal.open('save')(event)
     }
     const handleDateChange = (e) => {
-        console.log(e.target.value)
         setActivityPerDate(true)
         setSelectedDate(e.target.value)
-        let obj={}
-        if(e.target.value in props.userActiveDetails)
-        obj[e.target.value]=props.userActiveDetails[e.target.value]
+        let obj = {}
+        if (e.target.value in props.userActiveDetails)
+            obj[e.target.value] = props.userActiveDetails[e.target.value]
         else
-        obj[e.target.value]={"start_time":"No Major Actions","end_time":""}
-        props.dispatch({ type: "SelectedDateDetails",target: obj })
+            obj[e.target.value] = { "start_time": "No Major Actions", "end_time": "" }
+        props.dispatch({ type: "SelectedDateDetails", target: obj })
 
     }
-    const showAllActivity=(e)=>{
+    const showAllActivity = (e) => {
         setActivityPerDate(false)
         setSelectedDate("")
     }
@@ -155,25 +149,25 @@ function DashBoard(props) {
             </Paper>
 
             <JwModal id="save" className="dialog">
-                <h4 className="heading" style={{textAlign:"center"}}>User Activity Details</h4>
-                
+                <h4 className="heading" style={{ textAlign: "center" }}>User Activity Details</h4>
+
                 <span className="date-container">
-                <label style={{marginRight:"2%"}}>Select Date</label>
-                <input type="date" onChange={handleDateChange} value={selectedDate}/>
+                    <label style={{ marginRight: "2%" }}>Select Date</label>
+                    <input type="date" onChange={handleDateChange} value={selectedDate} />
                 </span>
                 <div >
-                    {selectedDate!=""&&<button type="text" className="btn-activity" onClick={showAllActivity}>All Activity</button>}
+                    {selectedDate != "" && <button type="text" className="btn-activity" onClick={showAllActivity}>All Activity</button>}
                 </div>
                 <Timeline lineColor={'#ddd'}>
-                    {Object.keys(!activityPerDate?props.userActiveDetails:props.selectedDateDetails).map((instance, index) => {
+                    {Object.keys(!activityPerDate ? props.userActiveDetails : props.selectedDateDetails).map((instance, index) => {
                         return <TimelineItem
                             key={index}
                             dateText={instance}
                             style={{ color: '#fb8c00' }}
                         >
                             <h6>Actions</h6>
-                            <p>{!activityPerDate?props.userActiveDetails[instance].start_time:props.selectedDateDetails[instance].start_time}</p>
-                            <p>{!activityPerDate?props.userActiveDetails[instance].end_time:props.selectedDateDetails[instance].end_time}</p>
+                            <p>{!activityPerDate ? props.userActiveDetails[instance].start_time : props.selectedDateDetails[instance].start_time}</p>
+                            <p>{!activityPerDate ? props.userActiveDetails[instance].end_time : props.selectedDateDetails[instance].end_time}</p>
                         </TimelineItem>
                     })}
 
@@ -188,7 +182,7 @@ function mapStateToProps(state) {
     return {
         isLoginSuccess: state.isLoginSuccess,
         userActiveDetails: state.userActiveDetails,
-        selectedDateDetails:state.selectedDateDetails
+        selectedDateDetails: state.selectedDateDetails
 
 
     }

@@ -6,41 +6,28 @@ import {
     Redirect,
 } from 'react-router-dom'
 
-
 class Login extends React.Component {
     constructor(props) {
         super(props)
         this.isAuthenticate = this.isAuthenticate.bind(this)
     }
     onSubmit(type, event) {
-        console.log(event.target.value)
-
         this.props.dispatch({ type: type, target: event.target.value })
-      
     }
     isAuthenticate(event) {
         event.preventDefault();
-        console.log(this.props.username,this.props.password)
-              
-                if (this.props.username==="admin"&&this.props.password==="admin") {
-                    document.getElementById('user101').style.display = 'none'
-                    this.props.dispatch({ type: "onLoginSuccess", target: true })
-                }
-                else {
-                    document.getElementById('user101').style.display = 'block'
-                    this.props.dispatch({ type: "onLoginSuccess", target: false })
-
-                }
-
-            
-     
+        if (this.props.username === "admin" && this.props.password === "admin") {
+            document.getElementById('user101').style.display = 'none'
+            this.props.dispatch({ type: "onLoginSuccess", target: true })
+        }
+        else {
+            document.getElementById('user101').style.display = 'block'
+            this.props.dispatch({ type: "onLoginSuccess", target: false })
+        }
     }
 
     render() {
-
         if (this.props.isLoginSuccess) {
-
-            console.log("login success")
             return <Redirect to='/dashboard' push />;
         }
 
@@ -68,9 +55,6 @@ class Login extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="footer">
-
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,7 +68,7 @@ function mapStateToProps(state) {
         isLoginSuccess: state.isLoginSuccess,
         username: state.username,
         password: state.password,
-       
+
     }
 }
 

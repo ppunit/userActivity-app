@@ -2,17 +2,20 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  // Link,
-  // Redirect,
+  Route
 } from "react-router-dom";
 import { connect } from 'react-redux'
 import Login from './components/login/login'
 import './App.scss';
 import DashBoard from './components/dashboard/dashboard'
-
+/**
+ * App client Library
+ */
 class App extends React.Component {
-  
+  /**
+   * 
+   * @param {*} e 
+   */
   logout(e) {
     this.props.dispatch({ type: "onLoginSuccess", target: false })
     if (this.props.history)
@@ -24,11 +27,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          
           <div><h3>Users Activity</h3></div>
           {Boolean(this.props.isLoginSuccess) ? <div className="logout-navigation-link" onClick={e => this.logout()}>Logout</div> : null}
-        
-         
         </header>
         <Router >
           <Switch>
