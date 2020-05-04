@@ -11,15 +11,12 @@ Starting it has a login page
 After login it has user details
 
 On clicking on any user, a modal will appear which displays
-all the time ranges during which they were active on that day
+the video responses of job applicant.
 
-The modal has a option of selecting date at the top which displays the details of the user accoring to the selected date.
+The modal has a option of public comment on which we can give our comments for the applicant.
 
-If on the selected date the user has No activity then it shows No Major Actions.
+If the user has no application then it shows no application.
 
-After selecting the date a button will comes up 
-
-The All Actvity button is used to show all the time ranges for the user
 
 # Technology Used
   ReactJS, Redux

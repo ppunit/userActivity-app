@@ -2,8 +2,9 @@ const initialState = {
     isLoginSuccess: false,
     username: "",
     password: "",
-    userActiveDetails: "",
-    selectedDateDetails: ""
+    userVideoLink: "",
+    userRelevantQuestions:"",
+    userId:""
 }
 
 export default function reducer(state = initialState, action) {
@@ -11,8 +12,9 @@ export default function reducer(state = initialState, action) {
         case 'onLoginSuccess': return { ...state, isLoginSuccess: action.target };
         case 'username': return { ...state, username: action.target }
         case 'password': return { ...state, password: action.target }
-        case 'UserActiveDetails': return { ...state, userActiveDetails: action.target }
-        case 'SelectedDateDetails': return { ...state, selectedDateDetails: action.target }
+        case 'UserVideoLink': return { ...state, userVideoLink: action.target }
+        case "UserId":return {...state,userId:action.target}
+        case 'UserRelevantQuestions': return { ...state,userRelevantQuestions: action.target }
         default:
             return state;
 

@@ -27,7 +27,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <div><h3>Users Activity</h3></div>
+          <div><h3>Job Application App</h3></div>
           {Boolean(this.props.isLoginSuccess) ? <div className="logout-navigation-link" onClick={e => this.logout()}>Logout</div> : null}
         </header>
         <Router >
